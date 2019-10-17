@@ -1,1 +1,3 @@
 = tmux-plumb
+
+Send text to the Plan 9 plumber from copy mode.
