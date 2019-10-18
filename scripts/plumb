@@ -27,7 +27,6 @@ plumbCurrentWORD() {
     local prefixText="$(tmux \
         send-keys -X begin-selection \; \
         send-keys -X previous-space \; \
-        send-keys -X cursor-right \; \
         send-keys -X copy-selection \; \
         show-buffer \; \
         delete-buffer)"
@@ -50,7 +49,10 @@ main() {
         plumbCurrentWORD
     fi
 
-    errors=$(9 plumb -s tmux -a "$attrs" "$text" 2>&1)
+    workingDir="$(tmux display-message -p '#{pane_current_path}')"
+
+    command=( 9 plumb -s tmux -w "$workingDir" -a "$attrs" "$text" )
+    errors="$("${command[@]}" 2>&1)"
     if (( $? != 0 )); then
         tmux display-message -- "$errors"
     fi
