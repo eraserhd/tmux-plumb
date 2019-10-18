@@ -1,34 +1,59 @@
 #!/usr/bin/env bash
 
-attrs=''
+declare -g text=''
+declare -g attrs=''
 
-haveSelection="$(tmux display-message -p '#{selection_present}')"
-if [[ $haveSelection  = 1 ]]; then
-    wholeText="$(tmux \
+appendAttr() {
+    local newAttr="$1"
+    if [[ -z $attrs ]]; then
+        attrs="$newAttr"
+    else
+        attrs="${attrs} ${newAttr}"
+    fi
+}
+
+haveSelection() {
+    [[ "$(tmux display-message -p '#{selection_present}')" = 1 ]]
+}
+
+plumbSelectionText() {
+    text="$(tmux \
         send-keys -X copy-selection \; \
         show-buffer \; \
         delete-buffer)"
-else
-    prefixText="$(tmux \
+}
+
+plumbCurrentWORD() {
+    local prefixText="$(tmux \
         send-keys -X begin-selection \; \
         send-keys -X previous-space \; \
         send-keys -X cursor-right \; \
         send-keys -X copy-selection \; \
         show-buffer \; \
         delete-buffer)"
-    wholeText="$(tmux \
+    text="$(tmux \
         send-keys -X begin-selection \; \
         send-keys -X next-space \; \
         send-keys -X -N 2 cursor-left \; \
         send-keys -X copy-selection \; \
         show-buffer \; \
         delete-buffer)"
-    click="${#prefixText}"
+    local click="${#prefixText}"
     click=$(( click - 1 ))
-    attrs="click=${click}"
-fi
+    appendAttr "click=${click}"
+}
 
-plumbErrors=$(9 plumb -s tmux -a "$attrs" "$wholeText" 2>&1)
-if (( $? != 0 )); then
-    tmux display-message -- "$plumbErrors"
-fi
+main() {
+    if haveSelection; then
+        plumbSelectionText
+    else
+        plumbCurrentWORD
+    fi
+
+    errors=$(9 plumb -s tmux -a "$attrs" "$text" 2>&1)
+    if (( $? != 0 )); then
+        tmux display-message -- "$errors"
+    fi
+}
+
+main "$@"
