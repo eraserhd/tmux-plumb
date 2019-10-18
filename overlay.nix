@@ -1,3 +1,5 @@
 self: super: {
-  tmux-plumb = super.callPackage ./derivation.nix {};
+  tmuxPlugins = super.tmuxPlugins // {
+    plumb = super.callPackage ./derivation.nix {};
+  };
 }
