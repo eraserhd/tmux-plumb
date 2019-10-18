@@ -1,3 +1,25 @@
-= tmux-plumb
+tmux-plumb
+==========
+
+:experimental:
 
 Send text to the Plan 9 plumber from copy mode.
+
+Installing
+----------
+
+==== https://github.com/tmux-plugins/tpm[Tmux Plugin Manager]:
+
+Add the following to `~/.tmux.conf`, then reload with `prefix` kbd:[I]:
+
+----
+set -g @plugin 'eraserhd/tmux-plumb'
+----
+
+==== Without Tmux Plugin Manager
+
+Add the following to `~/.tmux.conf`, then reload with `tmux source ~/.tmux.conf`:
+
+----
+run-shell /path/to/tmux-plumb/plumb.tmux
+----
