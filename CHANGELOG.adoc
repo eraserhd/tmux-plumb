@@ -1,4 +1,12 @@
 = Changes
 
-== Unreleased
+:experimental:
 
+https://github.com/eraserhd/tmux-plumb/compare/v0.1.0...HEAD[Unreleased]
+------------------------------------------------------------------------
+
+v0.1.0
+------
+
+* kbd:[Enter] plumbs a click or selected text.
+* Plumbs the current pane directory as working directory.
