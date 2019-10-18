@@ -3,10 +3,16 @@ tmux-plumb
 
 :experimental:
 
-Send text to the Plan 9 plumber from copy mode.
+Send text to the Plan 9 plumber from tmux copy mode.
 
 Installing
 ----------
+
+Prerequisites:
+
+* https://github.com/tmux/tmux[tmux] must be installed, of course.
+* https://9fans.github.io/plan9port/[plan9port] must be installed.
+* The plumber must be configured and running.
 
 ==== https://github.com/tmux-plugins/tpm[Tmux Plugin Manager]:
 
