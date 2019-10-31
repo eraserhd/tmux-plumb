@@ -5,6 +5,8 @@
 https://github.com/eraserhd/tmux-plumb/compare/v0.1.0...HEAD[Unreleased]
 ------------------------------------------------------------------------
 
+* kbd:[Enter] now exits copy mode after sending text.
+* kbd:[Meta]-kbd:[Enter] sends text without exiting copy mode.
 * Consider a 1-character selection a click.  This supports
   https://github.com/eraserhd/tmux-copy-mode-kakoune[tmux-copy-mode-kakoune],
   which always has a selection started.

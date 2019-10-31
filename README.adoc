@@ -5,9 +5,10 @@ tmux-plumb
 
 Send text to the Plan 9 plumber from tmux copy mode.
 
-This plugin maps kbd:[Enter] in Vi copy mode.
+This plugin maps kbd:[Enter] and kbd:[Meta]-kbd:[Enter] in Vi copy mode.
 If a selection is present, the contents of the selection are sent.
 Otherwise, the whitespace-delimited text at the cursor is sent as a "click".
+kbd:[Enter] exits copy mode after sending the text.
 
 Installing
 ----------
