@@ -12,15 +12,23 @@ appendAttr() {
     fi
 }
 
+selectionText() {
+    tmux send-keys -X copy-selection \; show-buffer \; delete-buffer
+}
+
 isClick() {
-    [[ "$(tmux display-message -p '#{selection_present}')" = 0 ]]
+    if [[ "$(tmux display-message -p '#{selection_present}')" = 0 ]]; then
+        return 0
+    fi
+    local sel="$(selectionText)"
+    if (( ${#sel} <= 1 )); then
+        return 0
+    fi
+    return 1
 }
 
 plumbSelectionText() {
-    text="$(tmux \
-        send-keys -X copy-selection \; \
-        show-buffer \; \
-        delete-buffer)"
+    text="$(selectionText)"
 }
 
 plumbClick() {

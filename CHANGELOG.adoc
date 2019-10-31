@@ -5,6 +5,10 @@
 https://github.com/eraserhd/tmux-plumb/compare/v0.1.0...HEAD[Unreleased]
 ------------------------------------------------------------------------
 
+* Consider a 1-character selection a click.  This supports
+  https://github.com/eraserhd/tmux-copy-mode-kakoune[tmux-copy-mode-kakoune],
+  which always has a selection started.
+
 v0.1.0
 ------
 
