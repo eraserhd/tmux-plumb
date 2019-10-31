@@ -49,10 +49,9 @@ main() {
         plumbCurrentWORD
     fi
 
-    workingDir="$(tmux display-message -p '#{pane_current_path}')"
-
-    command=( 9 plumb -s tmux -w "$workingDir" -a "$attrs" "$text" )
-    errors="$("${command[@]}" 2>&1)"
+    local workingDir="$(tmux display-message -p '#{pane_current_path}')"
+    local -a command=( 9 plumb -s tmux -w "$workingDir" -a "$attrs" "$text" )
+    local errors="$("${command[@]}" 2>&1)"
     if (( $? != 0 )); then
         tmux display-message -- "$errors"
     fi
