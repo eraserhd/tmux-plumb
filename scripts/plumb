@@ -12,8 +12,8 @@ appendAttr() {
     fi
 }
 
-haveSelection() {
-    [[ "$(tmux display-message -p '#{selection_present}')" = 1 ]]
+isClick() {
+    [[ "$(tmux display-message -p '#{selection_present}')" = 0 ]]
 }
 
 plumbSelectionText() {
@@ -43,10 +43,10 @@ plumbClick() {
 }
 
 main() {
-    if haveSelection; then
-        plumbSelectionText
-    else
+    if isClick; then
         plumbClick
+    else
+        plumbSelectionText
     fi
 
     local workingDir="$(tmux display-message -p '#{pane_current_path}')"
