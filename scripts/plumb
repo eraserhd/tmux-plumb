@@ -23,7 +23,7 @@ plumbSelectionText() {
         delete-buffer)"
 }
 
-plumbCurrentWORD() {
+plumbClick() {
     local prefixText="$(tmux \
         send-keys -X begin-selection \; \
         send-keys -X previous-space \; \
@@ -46,7 +46,7 @@ main() {
     if haveSelection; then
         plumbSelectionText
     else
-        plumbCurrentWORD
+        plumbClick
     fi
 
     local workingDir="$(tmux display-message -p '#{pane_current_path}')"
