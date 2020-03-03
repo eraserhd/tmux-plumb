@@ -34,3 +34,24 @@ Add the following to `~/.tmux.conf`, then reload with `tmux source ~/.tmux.conf`
 ----
 run-shell /path/to/tmux-plumb/plumb.tmux
 ----
+
+==== NixOS and nix-darwin
+
+Add the following to your machine config.
+
+.NixOS
+----
+  programs.tmux.extraConfig = ''
+    run-shell ${pkgs.tmuxPlugins.plumb}/share/tmux-plugins/plumb/plumb.tmux
+  ''
+----
+
+.nix-darwin
+----
+  programs.tmux.tmuxConfig = ''
+    run-shell ${pkgs.tmuxPlugins.plumb}/share/tmux-plugins/plumb/plumb.tmux
+  ''
+----
+
+For a configuration that works for both, see
+https://github.com/eraserhd/dotfiles/blob/develop/tmux/default.nix[here].
